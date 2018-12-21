@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container voting-block">
+        <a href="http://localhost/projects/marvel/prototype/rank_list.php">Rank page</a>
+        <form action="ranking.php" method="POST" class="form-group">
+            <div class="row">
+                <div class="col">
+                    <h3>{{ fighters['character1']['name'] }}</h3>
+                    <img src="{{fighters['character1']['image']}}" class="character-image" alt="Responsive image">
+                    <div>
+                        <input type="hidden"  name="ids" value="{{fighters['character1']['id']}},{{fighters['character2']['id']}}">
+                        <button id="tea-submit" type="submit" name="winner" value="{{ fighters['character1']['id'] }}" class="btn btn-success">here</button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <h3>{{ fighters['character2']['name'] }}</h3>
+                    <img src="{{fighters['character2']['image']}}" class="character-image" alt="Responsive image">
+                    <div>
+                        <input type="hidden"  name="ids" value="{{fighters['character1']['id']}},{{fighters['character2']['id']}}">
+                        <button id="coffee-submit" type="submit" name="winner" value="{{fighters['character2']['id']}}" class="btn btn-success">here also</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

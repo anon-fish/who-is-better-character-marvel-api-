@@ -1,0 +1,16 @@
+/* styles for voting page */
+
+.voting-block{
+    height: 10%;
+}
+
+.character-image{
+    max-width: 100%;
+    height: 500px;
+    width: auto;
+}
+
+/* styles for ranking page */
+.pagination-bar{
+    margin-left: 38%;
+}

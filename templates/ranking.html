@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% if tpages > 1 %}
+
+        {# Number of page around current page+1 #}
+        {% set nearbyPagesLimit = 4 %}
+        {% set i = 0 %}
+        <div class="container">
+            <a href="http://localhost/projects/marvel/prototype/">voting page</a>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Character</th>
+                    <th scope="col">score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for score in scores %}
+                  <tr>
+                    <th scope="row">{{score['rank']}}</th>
+                    <td>{{score['name']}}</td>
+                    <td>{{score['score']}}</td>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <ul class="pagination pagination-bar">
+                {% if currentPage != 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="http://localhost/projects/marvel/prototype/rank_list.php?page=1"><<</a>
+                </li>
+                {% endif %}
+                {% for i in 1..tpages %}
+                    {% if 0 == (currentPage - nearbyPagesLimit) - loop.index %} {# dot before #}
+                        <li class="page-item disabled"><a href="#">...</a></li>
+                    {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index %} {# dot after #}
+                        <li class="page-item disabled"><a href="#">...</a></li>
+                    {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index %} {# hide all before #}
+                    {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index %} {# hide all after #}
+                    {% else %}
+                        <li {% if currentPage == loop.index  %} class="page-item active"{% endif %}>
+                            <a class="page-link" href="http://localhost/projects/marvel/prototype/rank_list.php?page={{loop.index}}">{{ loop.index }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if currentPage != tpages %}
+                <li class="page-item">
+                    <a class="page-link" href="http://localhost/projects/marvel/prototype/rank_list.php?page={{tpages}}">>></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
